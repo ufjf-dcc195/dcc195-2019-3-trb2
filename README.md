@@ -1,6 +1,6 @@
 # Atendimento a Usuários PCDP
 
-Sistema desenvolvido para cadastrar e classificar atendimentos a usuários do PCDP.
+Sistema desenvolvido para cadastrar e classificar atendimentos a usuários do PCDP (Proposta de Concessão de Diárias e Passagens).
 O sistema foi desenvolvido de forma colaborativa pelos alunos da disciplina DCC195 da turma 2019-3.
 
 O sistema cobre
