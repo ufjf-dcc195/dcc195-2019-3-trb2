@@ -18,7 +18,7 @@ function createUser(req, res, next) {
     })
 }
 function updateUser (req, res, next) {
-    User.updateOne(req.body._id, req.body, {new: true}, function (err, user) {
+    User.findOneAndUpdate({_id:req.params.userId}, req.body, {new: true}, function (err, user) {
         if (err) {
             res.status(400).send(err.message);
         } else {
@@ -27,7 +27,7 @@ function updateUser (req, res, next) {
     });
 }
 function deleteUser (req, res, next) {
-    User.deleteOne(req.body._id,function (err) {
+    User.findOneAndRemove({_id:req.params.userId},function (err) {
         if (err) {
             res.status(400).send(err.message);
         } else {
@@ -47,13 +47,12 @@ function getAllUsers (req, res, next) {
 }
 
 
-function getByIdUser (req, res, next, id) {
-    User.findOne({_id: id}, function (err, user) {
+function getByIdUser (req, res, next) {
+    User.findOne({_id: req.params.userId}, function (err, user) {
         if (err) {
             res.status(400).send(err.message);
         } else {
-            req.user = user;
-            next();
+            res.json(user)
         }
     });
 };
