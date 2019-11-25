@@ -5,8 +5,8 @@ const UserSchema = new Schema({
     nome: {type: String, required: true},
     cpf: {type:String},
     telefone: String,
-    unidadePrincipal: {type: Schema.Types.ObjectId, ref: 'Unidades'},
-    unidadeSecundaria: {type: Schema.Types.ObjectId, ref: 'Unidades'},
+    unidadePrincipal: {type: Schema.Types.ObjectId, ref: 'Unit'},
+    unidadeSecundaria: {type: Schema.Types.ObjectId, ref: 'Unit'},
     email: {
         type: String, required: true,
         trim: true, unique: true,

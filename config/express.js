@@ -24,7 +24,7 @@ module.exports = function(){
     const unitsRouter = require('../app/routes/unit');
     const usersRouter = require('../app/routes/user');
     app.use(express.static("./public"))
-    app.use('/unit', unitsRouter);
+    app.use('/units', unitsRouter);
     app.use('/users', usersRouter);
 
     return app;
