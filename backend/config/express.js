@@ -1,4 +1,4 @@
-const express = require("express"),swagger = require("swagger-node-express");
+const express = require("express");
 const morgan = require("morgan");
 const compression = require("compression");
 const bodyParser = require("body-parser");
