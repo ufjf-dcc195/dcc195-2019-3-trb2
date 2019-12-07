@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const session = require("express-session");
 const config = require("./config");
+const ejs = require('ejs');
 
 module.exports = function(){
     const app = express();
@@ -21,10 +22,15 @@ module.exports = function(){
         resave: true,
         secret: config.sessionSecret
     }));
+	app.set('views', './app/views');
+	app.set('view engine', 'ejs');
     
     const supportPerUserRouter = require('../app/routes/supportPerUser');
+    const supportPerUserRouter = require('../app/routes/supportPerUnit');
     app.use(express.static("./public"))
     app.use('/supportPerUser', supportPerUserRouter);
+    app.use('/supportPerUnit', supportPerUnitRouter);
+    app.use(express.static('./public'));
 
     return app;
 
