@@ -10,3 +10,6 @@ const AttendanceSchema = new Schema({
     nivel:  {type: Number, min: 1, max: 5},
     observacao: {type:String, required:false},
 });
+
+
+mongoose.model('Attendance', AttendanceSchema);
