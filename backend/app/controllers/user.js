@@ -17,8 +17,8 @@ function createUser(req, res, next) {
         }
     })
 }
-function updateUser (req, res, next) {
-    User.findOneAndUpdate({_id:req.params.userId}, req.body, {new: true}, function (err, user) {
+function updateUser(req, res, next) {
+    User.findOneAndUpdate({ _id: req.params.userId }, req.body, { new: true }, function (err, user) {
         if (err) {
             res.status(400).send(err.message);
         } else {
@@ -26,8 +26,8 @@ function updateUser (req, res, next) {
         }
     });
 }
-function deleteUser (req, res, next) {
-    User.findOneAndRemove({_id:req.params.userId},function (err) {
+function deleteUser(req, res, next) {
+    User.findOneAndRemove({ _id: req.params.userId }, function (err) {
         if (err) {
             res.status(400).send(err.message);
         } else {
@@ -36,7 +36,9 @@ function deleteUser (req, res, next) {
     });
 };
 
-function getAllUsers (req, res, next) {
+function getAllUsers(req, res, next) {
+    
+
     User.find(function (err, users) {
         if (err) {
             res.status(400).send(err.message);
@@ -47,8 +49,8 @@ function getAllUsers (req, res, next) {
 }
 
 
-function getByIdUser (req, res, next) {
-    User.findOne({_id: req.params.userId}, function (err, user) {
+function getByIdUser(req, res, next) {
+    User.findOne({ _id: req.params.userId }, function (err, user) {
         if (err) {
             res.status(400).send(err.message);
         } else {

@@ -30,11 +30,13 @@ module.exports = function(){
     const unitsRouter = require('../app/routes/unit');
     const usersRouter = require('../app/routes/user');
     const sessionRouter = require('../app/routes/session');
+    const auxRouter = require('../app/routes/aux');
 
     app.use(express.static("./public"))
     app.use('/units', unitsRouter);
     app.use('/users', usersRouter);
     app.use('/session', sessionRouter);
+    app.use('/', auxRouter);
 
     return app;
 
