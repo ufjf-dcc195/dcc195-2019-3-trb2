@@ -8,19 +8,23 @@ const config = require("./config");
 
 module.exports = function(){
     const app = express();
+    const sess = {
+        saveUninitialized: false,
+        resave: false,
+        secret: config.sessionSecret
+    }
+
     if(process.env.NODE_ENV === "development"){
         app.use(morgan('dev'));
     } else {
         app.use(compression());
     }
+
     app.use(bodyParser.urlencoded({"extended": true}));
     app.use(bodyParser.json());
     app.use(methodOverride());
-    app.use(session({
-        saveUninitialized: true,
-        resave: true,
-        secret: config.sessionSecret
-    }));
+
+    app.use(session(sess));
     const unitsRouter = require('../app/routes/unit');
     const usersRouter = require('../app/routes/user');
     app.use(express.static("./public"))
