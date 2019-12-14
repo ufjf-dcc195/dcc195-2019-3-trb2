@@ -15,8 +15,13 @@ const redirectHome = (req, res, next) => {
     }
 }
 
+const users = [
+    { id: 1, name: 'adm', email: 'adm@email.com', password: 'secret' },
+]
+
 module.exports = {
     login,
+    logout
 };
 
 
@@ -24,10 +29,10 @@ function login(req, res, next) {
     //redirectHome()
     const { email, password } = req.body
 
-    if (email && password) {
+    if (email && password) { //TODO: validation
 
         const user = user.find(
-            user => user.email === email && user.password === password //todo: hash        
+            user => user.email === email && user.password === password //TODO: hash        
         )
         if (user) {
             req.session.userId = user.id
@@ -37,3 +42,16 @@ function login(req, res, next) {
     }
     res.redirect('/login')
 }
+
+
+function logout(req, res, next) {
+    //redirectLogin()
+    req.session.destroy(err => {
+        if (err) {
+            return res.redirect('/home')
+        }
+        res.clearCookie(SESS_NAME)
+        res.redirect('/login')
+    })
+}
+

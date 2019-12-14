@@ -8,7 +8,9 @@ const config = require("./config");
 
 module.exports = function(){
     const app = express();
+    const SESS_NAME = 'sid'
     const sess = {
+        name: SESS_NAME,
         saveUninitialized: false,
         resave: false,
         secret: config.sessionSecret
