@@ -19,6 +19,7 @@ const users = [
     { id: 1, name: 'adm', email: 'adm@email.com', password: 'secret' },
 ]
 
+
 module.exports = {
     login,
     logout
@@ -55,3 +56,4 @@ function logout(req, res, next) {
     })
 }
 
+//TODO: const {userId} = req.session
