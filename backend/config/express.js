@@ -34,7 +34,7 @@ module.exports = function(){
     app.use(express.static("./public"))
     app.use('/units', unitsRouter);
     app.use('/users', usersRouter);
-    app.use('/', sessionRouter);
+    app.use('/session', sessionRouter);
 
     return app;
 
