@@ -1,7 +1,6 @@
 const configExpress = require('../../config/express');
-const users = [
-    { id: 1, name: 'adm', email: 'adm@email.com', password: 'secret' },
-]
+const { check, validationResult } = require('express-validator');
+
 module.exports = {
     login,
     logout
@@ -24,9 +23,18 @@ const redirectHome = (req, res, next) => {
     }
 }
 
+function validarErros(req) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array() });
+    }
+}
+
 function login(req, res, next) {
     //redirectHome()
     // console.log("Login")
+    validarErros(req)
+
     const { email, password } = req.body
 
     if (email && password) { //TODO: validation
@@ -47,6 +55,8 @@ function login(req, res, next) {
 function logout(req, res, next) {
     //redirectLogin()
     // console.log("Logout")
+    validarErros(req)
+
     req.session.destroy(err => {
         if (err) {
             return res.redirect('/home')
