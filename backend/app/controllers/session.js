@@ -16,10 +16,24 @@ const redirectHome = (req, res, next) => {
 }
 
 module.exports = {
-    login
+    login,
 };
 
 
 function login(req, res, next) {
+    //redirectHome()
+    const { email, password } = req.body
 
+    if (email && password) {
+
+        const user = user.find(
+            user => user.email === email && user.password === password //todo: hash        
+        )
+        if (user) {
+            req.session.userId = user.id
+            return res.redirect('/home')
+        }
+
+    }
+    res.redirect('/login')
 }
