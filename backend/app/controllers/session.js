@@ -1,5 +1,7 @@
 const configExpress = require('../../config/express');
 const { check, validationResult } = require('express-validator');
+const Moongoose = require('mongoose');
+const User = Moongoose.model("User");
 
 module.exports = {
     login,
@@ -31,26 +33,20 @@ function validarErros(req) {
 }
 
 function login(req, res, next) {
-    //redirectHome()
+    // redirectHome()
     // console.log("Login")
-    validarErros(req)
-
+    // validarErros(req)
     const { email, password } = req.body
 
-    if (email && password) { //TODO: validation
-
-        const user = user.find(
-            user => user.email === email && user.password === password //TODO: hash        
-        )
+    if (email && password) {
+        const user = User.find(user => user.email === email && user.password === password)
         if (user) {
             req.session.userId = user.id
             return res.redirect('/home')
         }
-
     }
     res.redirect('/login')
 }
-
 
 function logout(req, res, next) {
     //redirectLogin()
