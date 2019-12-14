@@ -27,9 +27,12 @@ module.exports = function(){
     app.use(session(sess));
     const unitsRouter = require('../app/routes/unit');
     const usersRouter = require('../app/routes/user');
+    const sessionRouter = require('../app/routes/session');
+
     app.use(express.static("./public"))
     app.use('/units', unitsRouter);
     app.use('/users', usersRouter);
+    app.use('/', sessionRouter);
 
     return app;
 
