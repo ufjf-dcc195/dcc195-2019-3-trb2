@@ -2,8 +2,8 @@ const express = require("./config/express");
 const mongoose = require("./config/mongoose");
 
 const config = require("./config/config");
-const db = mongoose();
+mongoose();
 const app = express();
 
-app.listen(8080);
-
+app.listen(process.env.PORT);
+console.log(`App running in http://localhost:${process.env.PORT}`)
