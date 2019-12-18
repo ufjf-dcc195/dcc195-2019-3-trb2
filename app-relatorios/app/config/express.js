@@ -25,8 +25,8 @@ module.exports = function(){
 	app.set('views', './app/views');
 	app.set('view engine', 'ejs');
     
-    const supportPerUserRouter = require('../app/routes/supportPerUser');
-    const supportPerUserRouter = require('../app/routes/supportPerUnit');
+    const supportPerUserRouter = require('../routes/supportPerUser');
+    const supportPerUnitRouter = require('../routes/supportPerUnit');
     app.use(express.static("./public"))
     app.use('/supportPerUser', supportPerUserRouter);
     app.use('/supportPerUnit', supportPerUnitRouter);
