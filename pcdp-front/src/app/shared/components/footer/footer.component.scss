@@ -1,0 +1,17 @@
+@import "src/assets/scss/settings.scss";
+@import "src/assets/scss/generics.scss";
+@import "src/assets/scss/tools.scss";
+
+@include  text-font("src/assets/images/fonts/rubik");
+
+.footer {
+  font-family: Rubik;
+  text-align: center;
+  background-color: #f4f4f4;
+  width: max-content;
+  min-width: max-content;
+  position: fixed;
+  bottom: 0%;
+  max-height: 30px;
+  z-index: 3;
+}

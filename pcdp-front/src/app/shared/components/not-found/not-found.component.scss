@@ -1,0 +1,50 @@
+@import "src/assets/scss/settings.scss";
+@import "src/assets/scss/generics.scss";
+@import "src/assets/scss/tools.scss";
+
+@include  text-font("src/assets/images/fonts/rubik");
+
+.header-error {
+  font-family: $font;
+  width: 100%;
+  margin: 0 0 0 0;
+  padding: 6px 2% 6px 2%;
+  background-color: #555555;
+  color: #fff;
+}
+
+.box {
+  font-family: $font;
+  border-width: 2px;
+  border-style: groove;
+  border-image: initial;
+}
+
+.content {
+  font-family: $font;
+  margin: 0 0 0 2%;
+  background-color: $whisper;
+  position: relative;
+}
+
+.content-container {
+  background-color: #fff;
+  width: 96%;
+  margin-top: 8px;
+  margin-bottom: 0px;
+  padding: 10px;
+  position: relative;
+ 
+}
+
+.description {
+  color: $red;
+  font-family: $font;
+}
+
+.background-error{
+  background-color: $whisper;
+  position: fixed;
+  z-index: 4;
+  height: 100%;
+}
