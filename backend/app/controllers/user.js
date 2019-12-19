@@ -37,19 +37,7 @@ function deleteUser(req, res, next) {
 };
 
 function getAllUsers(req, res, next) {
-    const adm = new User({
-        nome: 'adm',
-        cpf: '72542891060',
-        email: 'adm@gmail.com',
-        telefone: '32323232',
-        realizouCurso: false,
-        password: 'adm'
-    });
-
-    adm.save(function (err, adm) {
-        if (err) return console.error(err);
-        console.dir(adm);
-    });
+    
 
     User.find(function (err, users) {
         if (err) {
