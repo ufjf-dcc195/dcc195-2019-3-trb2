@@ -19,3 +19,5 @@ UserSchema.path('cpf').validate(function (cpf) {
     return cpf && cpf.length === 11;
 }, 'CPF code must be 11 characters');
 mongoose.model('User', UserSchema);
+
+

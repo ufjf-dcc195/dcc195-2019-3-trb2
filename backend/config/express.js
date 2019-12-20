@@ -13,7 +13,8 @@ module.exports = function(){
         name: SESS_NAME,
         saveUninitialized: false,
         resave: false,
-        secret: config.sessionSecret
+        secret: config.sessionSecret,
+        cookie:{maxAge:6000}
     }
 
     if(process.env.NODE_ENV === "development"){

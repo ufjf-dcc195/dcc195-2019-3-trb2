@@ -3,27 +3,29 @@ const { check, validationResult } = require('express-validator');
 const Moongoose = require('mongoose');
 const User = Moongoose.model("User");
 
-module.exports = {
-    login,
-    logout
-};
-
-
 const redirectLogin = (req, res, next) => {
-    if (!req.session.userId) {
-        res.redirect('/login')
+    if (req.session.userId===undefined) {
+        res.send('Go to página Login')
     } else {
         next()
     }
 }
 
 const redirectHome = (req, res, next) => {
-    if (!req.session.userId) {
-        res.redirect('/home')
+    if (req.session.userId!=undefined) {
+        res.send('Go to página home')
     } else {
         next()
     }
 }
+
+module.exports = {
+    login,
+    logout,
+    redirectHome,
+    redirectLogin
+};
+
 
 function validarErros(req) {
     const errors = validationResult(req);
@@ -33,33 +35,30 @@ function validarErros(req) {
 }
 
 function login(req, res, next) {
-    // redirectHome()
-    // console.log("Login")
-    // validarErros(req)
-    const { email, password } = req.body
-
+    validarErros(req)
+    const { name, email, password } = req.body
     if (email && password) {
-        const user = User.find(user => user.email === email && user.password === password)
-        if (user) {
-            req.session.userId = user.id
-            return res.redirect('/home')
+
+        // let foundUser =  await User.findOne({"name":name}).lean();
+        // console.log(foundUser)
+
+        const email1 = "adm@gmail.com", password1 = "adm";
+        if (email1 === email && password1 === password) {
+            req.session.userId = "5dfadb4401013416551e91b9"
+            return res.send('Usuário logado com sucesso!')
         }
+        res.send('Login não foi efetuado!')
     }
-    res.redirect('/login')
 }
 
 function logout(req, res, next) {
-    //redirectLogin()
-    // console.log("Logout")
+    console.log(req.session.userId)
     validarErros(req)
-
     req.session.destroy(err => {
         if (err) {
             return res.redirect('/home')
         }
         res.clearCookie(configExpress.SESS_NAME)
-        res.redirect('/login')
+        res.send('Logout efetuado com sucesso!')
     })
 }
-
-//TODO: const {userId} = req.session

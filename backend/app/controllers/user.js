@@ -37,8 +37,6 @@ function deleteUser(req, res, next) {
 };
 
 function getAllUsers(req, res, next) {
-    
-
     User.find(function (err, users) {
         if (err) {
             res.status(400).send(err.message);
