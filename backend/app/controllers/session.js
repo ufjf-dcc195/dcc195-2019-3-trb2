@@ -30,6 +30,7 @@ function login(req, res, next) {
     validarErros(req)
     const { nome, email, password } = req.body
     if (email && password) {
+        // TODO: melhorar desempenho consulta
         User.find({}, function (err, users) {
             if (err) return res.send('Erro')
             let user = {}
