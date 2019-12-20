@@ -7,6 +7,7 @@ const AttendanceSchema = new Schema({
     usuario: {type: Schema.Types.ObjectId, ref: 'User'},
     atendimentoPorTelefone: Boolean,
     atendimentoPorPcdp: Boolean,
+    duvidaFrequente:  {type: Number, min: 1, max: 5},
     nivel:  {type: Number, min: 1, max: 5},
     observacao: {type:String, required:false},
 });
