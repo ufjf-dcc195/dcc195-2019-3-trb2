@@ -1,5 +1,6 @@
 const Moongoose = require('mongoose');
 const User = Moongoose.model("User");
+
 module.exports = {
     createUser,
     updateUser,

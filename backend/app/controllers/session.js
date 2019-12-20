@@ -1,16 +1,16 @@
 const configExpress = require('../../config/express')
 const { check, validationResult } = require('express-validator')
 const moongoose = require('mongoose')
-const User = moongoose.model("User")
+const Attendant = moongoose.model("Attendant");
 
 // TODO: inserir para todas rotas do sistema
 const redirectLogin = (req, res, next) => {
-    if (req.session.userId === undefined) res.send('Go to Login')
+    if (req.session.attendantId === undefined) res.send('Go to Login')
     else next()
 }
 
 const redirectHome = (req, res, next) => {
-    if (req.session.userId != undefined) res.send('Go to Home')
+    if (req.session.attendantId != undefined) res.send('Go to Home')
     else next()
 }
 
@@ -19,18 +19,37 @@ function validarErrosRequisicao(req) {
     if (!errors.isEmpty()) return res.status(422).json({ errors: errors.array() })
 }
 
+function getAllAttendant(req, res, next) {
+    // const adm = new Attendant({
+    //     nome: 'douglas1122',
+    //     senha: '123'
+    // });
+
+    // adm.save(function (err, adm) {
+    //     if (err) return console.error(err);
+    //     console.dir(adm);
+    // });
+    Attendant.find(function (err, attendants) {
+        if (err) {
+            res.status(400).send(err.message);
+        } else {
+            res.json(attendants);
+        }
+    });
+}
+
 function login(req, res, next) {
     validarErrosRequisicao(req)
-    const { nome, email, password } = req.body
-    if (email && password) {
+    const { nome, senha } = req.body
+    if (nome && senha) {
         // TODO: melhorar desempenho consulta
-        User.find({}, function (err, users) {
+        Attendant.find({}, function (err, attendants) {
             if (err) return res.send('Erro')
-            let user = {}
-            users.find((it) => { if (it.email == email) user = it }) // email is unique true
-            if (user.nome === nome && user.email === email && user.password === password) {
-                req.session.userId = user._id
-                return res.send('Usuário logado com sucesso!')
+            let attendant = {}
+            attendants.find((it) => { if (it.nome == nome && it.senha == senha) attendant = it })
+            if (attendant.nome === nome && attendant.senha === senha) {
+                req.session.attendantId = attendant._id
+                return res.send('Atendente logado com sucesso!')
             }
             res.send('Login não foi efetuado!')
         })
@@ -47,6 +66,7 @@ function logout(req, res, next) {
 }
 
 module.exports = {
+    getAllAttendant,
     login,
     logout,
     redirectHome,
