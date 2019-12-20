@@ -12,5 +12,7 @@ module.exports = function () {
     mongoose.Promise = global.Promise;
     require("../app/models/user");
     require("../app/models/unit");
+    require("../app/models/attendant");
+    require("../app/models/attendance");
     return mongoose;
 }
