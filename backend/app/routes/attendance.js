@@ -3,6 +3,7 @@ const router = express.Router()
 const attendanceController = require('../controllers/attendance')
 
 router.get('/', attendanceController.getAllAttendance)
-router.get('/duvidas', attendanceController.qtdAtendimentoNivelDuvida)
+router.get('/nivel', attendanceController.qtdAtendimentoNivelDuvida)
+router.get('/tipo', attendanceController.qtdAtendimentoTipoDuvida)
 
 module.exports = router;
