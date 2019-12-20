@@ -1,7 +1,7 @@
 const configExpress = require('../../config/express')
 const { check, validationResult } = require('express-validator')
-const Moongoose = require('mongoose')
-const User = Moongoose.model("User")
+const moongoose = require('mongoose')
+const User = moongoose.model("User")
 
 // TODO: inserir para todas rotas do sistema
 const redirectLogin = (req, res, next) => {
@@ -14,20 +14,13 @@ const redirectHome = (req, res, next) => {
     else next()
 }
 
-module.exports = {
-    login,
-    logout,
-    redirectHome,
-    redirectLogin
-};
-
-function validarErros(req) {
+function validarErrosRequisicao(req) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) return res.status(422).json({ errors: errors.array() })
 }
 
 function login(req, res, next) {
-    validarErros(req)
+    validarErrosRequisicao(req)
     const { nome, email, password } = req.body
     if (email && password) {
         // TODO: melhorar desempenho consulta
@@ -45,10 +38,17 @@ function login(req, res, next) {
 }
 
 function logout(req, res, next) {
-    validarErros(req)
+    validarErrosRequisicao(req)
     req.session.destroy(err => {
         if (err) return res.send('Erro. Go to Home')
         res.clearCookie(configExpress.SESS_NAME)
         res.send('Logout efetuado com sucesso!')
     })
 }
+
+module.exports = {
+    login,
+    logout,
+    redirectHome,
+    redirectLogin
+};
