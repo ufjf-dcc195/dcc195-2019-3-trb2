@@ -46,7 +46,7 @@ function login(req, res, next) {
         Attendant.find({}, function (err, attendants) {
             if (err) return res.send('Erro')
             let attendant = {}
-            attendants.find((it) => { if (it.nome == nome && it.senha == senha) attendant = it })
+            attendants.find((it) => { if (it.nome === nome && it.senha === senha) attendant = it })
             if (attendant.nome === nome && attendant.senha === senha) {
                 req.session.attendantId = attendant._id
                 return res.send('Atendente logado com sucesso!')
