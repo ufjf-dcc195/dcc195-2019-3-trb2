@@ -3,6 +3,7 @@ const { check, validationResult } = require('express-validator')
 const Moongoose = require('mongoose')
 const User = Moongoose.model("User")
 
+// TODO: inserir para todas rotas do sistema
 const redirectLogin = (req, res, next) => {
     if (req.session.userId === undefined) res.send('Go to Login')
     else next()
@@ -30,12 +31,9 @@ function login(req, res, next) {
     const { nome, email, password } = req.body
     if (email && password) {
         User.find({}, function (err, users) {
+            if (err) return res.send('Erro')
             let user = {}
-            users.find(
-                (it) => {
-                    if (it.email == email) user = it
-                }
-            )
+            users.find((it) => { if (it.email == email) user = it }) // email is unique true
             if (user.nome === nome && user.email === email && user.password === password) {
                 req.session.userId = user._id
                 return res.send('Usuário logado com sucesso!')
