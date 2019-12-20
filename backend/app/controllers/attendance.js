@@ -2,14 +2,14 @@ const moongoose = require('mongoose')
 const Attendance = moongoose.model("Attendance");
 
 function getAllAttendance(req, res, next) {
-    const adm = new Attendance({
-        nivel: 1        
-    });
+    // const adm = new Attendance({
+    //     nivel: 30        
+    // });
 
-    adm.save(function (err, adm) {
-        if (err) return console.error(err);
-        console.dir(adm);
-    });
+    // adm.save(function (err, adm) {
+    //     if (err) return console.error(err);
+    //     console.dir(adm);
+    // });
 
     Attendance.find(function (err, attendance) {
         if (err) {
@@ -25,14 +25,22 @@ function qtdAtendimentoNivelDuvida(req, res, next) {
 
     Attendance.find({}, function (err, attendance) {
         if (err) return res.send('Erro')
-        console.log(attendance)
-        // let attendant = {}
-        // attendants.find((it) => { if (it.nome === nome && it.senha === senha) attendant = it })
-        // if (attendant.nome === nome && attendant.senha === senha) {
-        //     req.session.attendantId = attendant._id
-        //     return res.send('Atendente logado com sucesso!')
-        // }
-        // res.send('Login não foi efetuado!')
+        attendance.find((it) => {
+            if (it.nivel === 1) cont_1++
+            if (it.nivel === 2) cont_2++
+            if (it.nivel === 3) cont_3++
+            if (it.nivel === 4) cont_4++
+            if (it.nivel === 5) cont_5++
+        })
+        res.json({
+            titulo: "Quantidade atendimento por nível",
+            nivel1: cont_1,
+            nivel2: cont_2,
+            nivel3: cont_3,
+            nivel4: cont_4,
+            nivel5: cont_5
+        });
+
     })
 }
 
