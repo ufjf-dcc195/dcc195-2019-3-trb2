@@ -1,5 +1,11 @@
 const moongoose = require('mongoose')
 const Attendance = moongoose.model("Attendance");
+const handlebars = require('express-handlebars')
+const express = require("express");
+const app = express()
+  
+app.engine('handlebars', handlebars({defaultLayout: 'index'}))
+app.set('view engine', 'handlebars')
 
 function getAllAttendance(req, res, next) {
     // const adm = new Attendance({
@@ -33,15 +39,16 @@ function qtdAtendimentoNivelDuvida(req, res, next) {
             if (it.nivel === 4) cont_4++
             if (it.nivel === 5) cont_5++
         })
-        res.json({
-            titulo: "Quantidade atendimento por nível dúvida",
-            otima: cont_1,
-            boa: cont_2,
-            regular: cont_3,
-            ruim: cont_4,
-            pessima: cont_5
-        });
+        // res.json({
+        //     titulo: "Quantidade atendimento por nível dúvida",
+        //     otima: cont_1,
+        //     boa: cont_2,
+        //     regular: cont_3,
+        //     ruim: cont_4,
+        //     pessima: cont_5
+        // });
 
+        res.render('nivel')
     })
 }
 
@@ -65,7 +72,6 @@ function qtdAtendimentoTipoDuvida(req, res, next) {
             prestacaoContas: cont_4,
             alteracaoPCDP: cont_5
         });
-
     })
 }
 
@@ -73,5 +79,4 @@ module.exports = {
     getAllAttendance,
     qtdAtendimentoNivelDuvida,
     qtdAtendimentoTipoDuvida
-    
 };
