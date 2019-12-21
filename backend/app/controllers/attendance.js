@@ -64,14 +64,21 @@ function qtdAtendimentoTipoDuvida(req, res, next) {
             if (it.duvidaFrequente === 4) cont_4++
             if (it.duvidaFrequente === 5) cont_5++
         })
-        res.json({
-            titulo: "Quantidade atendimento por tipo dúvida frequente",
+        // res.json({
+        //     titulo: "Quantidade atendimento por tipo dúvida frequente",
+        //     cadastroPCDP: cont_1,
+        //     legislacao: cont_2,
+        //     relatorios: cont_3,
+        //     prestacaoContas: cont_4,
+        //     alteracaoPCDP: cont_5
+        // });
+        res.render('qtdNivelTipoDuvida', {
             cadastroPCDP: cont_1,
             legislacao: cont_2,
             relatorios: cont_3,
             prestacaoContas: cont_4,
             alteracaoPCDP: cont_5
-        });
+        })
     })
 }
 
