@@ -1,7 +1,9 @@
-let express = require('express');
-const router = express.Router();
-const SessionController = require('../controllers/session');
+let express = require('express')
+const router = express.Router()
+const sessionController = require('../controllers/session')
+const redirect = require('../controllers/session')
 
-router.post('/login', SessionController.login);
-router.post('/logout', SessionController.logout);
+router.get('/', sessionController.getAllAttendant)
+router.post('/login', redirect.redirectHome, sessionController.login)
+router.post('/logout', redirect.redirectLogin, sessionController.logout)    
 module.exports = router;

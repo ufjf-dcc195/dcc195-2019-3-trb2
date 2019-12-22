@@ -1,5 +1,6 @@
 const Moongoose = require('mongoose');
 const User = Moongoose.model("User");
+
 module.exports = {
     createUser,
     updateUser,
@@ -37,8 +38,6 @@ function deleteUser(req, res, next) {
 };
 
 function getAllUsers(req, res, next) {
-    
-
     User.find(function (err, users) {
         if (err) {
             res.status(400).send(err.message);
