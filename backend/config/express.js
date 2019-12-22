@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const session = require("express-session");
 const config = require("./config");
+const ejs = require('ejs');
 
 module.exports = function(){
     const app = express();
@@ -27,6 +28,9 @@ module.exports = function(){
     app.use(methodOverride());
 
     app.use(session(sess));
+	app.set('views', './app/views');
+    app.set('view engine', 'ejs');
+    
     const unitsRouter = require('../app/routes/unit');
     const usersRouter = require('../app/routes/user');
     const sessionRouter = require('../app/routes/session');
