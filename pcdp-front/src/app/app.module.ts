@@ -1,14 +1,24 @@
+import { ComumModule } from './components/comum.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
+import { AppRoutingModule } from './app-routing.module';
+import { SharedModule } from './shared/components/shared.module';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FooterComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule,
+    SharedModule,
+    ComumModule,
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

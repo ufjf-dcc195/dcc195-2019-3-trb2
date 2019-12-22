@@ -1,0 +1,95 @@
+//FONT
+
+//MIXINS
+
+@mixin text-font($path) {
+  @font-face {
+    font-family: "Rubik";
+    src: url($path+"/Rubik-Medium.woff2") format("woff2"),
+      url($path+"/Rubik-Medium.woff") format("woff"),
+      url($path+"/Rubik-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Rubik";
+    src: url($path+"/Rubik-MediumItalic.woff2") format("woff2"),
+      url($path+"/Rubik-MediumItalic.woff") format("woff"),
+      url($path+"/Rubik-MediumItalic.ttf") format("truetype");
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  @font-face {
+    font-family: "Rubik";
+    src: url($path+"/Rubik-Regular.woff2") format("woff2"),
+      url($path+"/Rubik-Regular.woff") format("woff"),
+      url($path+"/Rubik-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Rubik";
+    src: url($path+"/Rubik-Light.woff2") format("woff2"),
+      url($path+"/Rubik-Light.woff") format("woff"),
+      url($path+"/Rubik-Light.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Rubik";
+    src: url($path+"/Rubik-Italic.woff2") format("woff2"),
+      url($path+"/Rubik-Italic.woff") format("woff"),
+      url($path+"/Rubik-Italic.ttf") format("truetype");
+    font-weight: normal;
+    font-style: italic;
+  }
+
+  @font-face {
+    font-family: "Rubik";
+    src: url($path+"/Rubik-BlackItalic.woff2") format("woff2"),
+      url($path+"/Rubik-BlackItalic.woff") format("woff"),
+      url($path+"/Rubik-BlackItalic.ttf") format("truetype");
+    font-weight: 900;
+    font-style: italic;
+  }
+
+  @font-face {
+    font-family: "Rubik";
+    src: url($path+"/Rubik-LightItalic.woff2") format("woff2"),
+      url($path+"/Rubik-LightItalic.woff") format("woff"),
+      url($path+"/Rubik-LightItalic.ttf") format("truetype");
+    font-weight: 300;
+    font-style: italic;
+  }
+
+  @font-face {
+    font-family: "Rubik";
+    src: url($path+"/Rubik-Black.woff2") format("woff2"),
+      url($path+"/Rubik-Black.woff") format("woff"),
+      url($path+"/Rubik-Black.ttf") format("truetype");
+    font-weight: 900;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Rubik";
+    src: url($path+"/Rubik-BoldItalic.woff2") format("woff2"),
+      url($path+"/Rubik-BoldItalic.woff") format("woff"),
+      url($path+"/Rubik-BoldItalic.ttf") format("truetype");
+    font-weight: bold;
+    font-style: italic;
+  }
+
+  @font-face {
+    font-family: "Rubik";
+    src: url($path+"/Rubik-Bold.woff2") format("woff2"),
+      url($path+"/Rubik-Bold.woff") format("woff"),
+      url($path+"/Rubik-Bold.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+  }
+}

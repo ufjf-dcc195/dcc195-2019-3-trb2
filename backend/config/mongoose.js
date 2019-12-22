@@ -1,8 +1,10 @@
 const config = require("./config");
 const mongoose = require("mongoose");
+
 module.exports = function () {
     mongoose.connect(config.db,
         {
+            useCreateIndex: true,
             useNewUrlParser: true,
             useUnifiedTopology: true
         },
@@ -10,5 +12,7 @@ module.exports = function () {
     mongoose.Promise = global.Promise;
     require("../app/models/user");
     require("../app/models/unit");
+    require("../app/models/attendant");
+    require("../app/models/attendance");
     return mongoose;
 }
