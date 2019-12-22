@@ -1,0 +1,17 @@
+<app-navbar></app-navbar>
+<div class="d-flex justify-content-center mt-5">
+    <div class="form-group col-md-10">
+        <h4>Cadastro de Unidade:</h4>
+        <label for="">Nome da unidade:</label>
+        <input type="text" [(ngModel)]="unit.nome" class="form-control" placeholder="Digite o nome da unidade">
+        <label for="">Unidades filhas:</label>
+        <select multiple class="form-control">
+            <option *ngFor="let unidade of unidades" [value]="unidade"> {{unidade.nome}} </option>
+        </select>
+
+        <div class="mt-5">
+            <button class="btn btn-success">Salvar</button>
+            <a href="/home" class="btn btn-danger ml-5">Voltar</a>
+        </div>
+    </div>
+</div>

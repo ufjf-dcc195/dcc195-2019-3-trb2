@@ -1,0 +1,64 @@
+<app-navbar></app-navbar>
+<div class="d-flex justify-content-center mt-5">
+    <div class="col-md-10">
+        <h4>Cadastro de Usuário:</h4>
+        <div class="form-group">
+            <label for="">Nome Completo:</label>
+            <input type="text" class="form-control" placeholder="Digite seu nome">
+        </div>
+        <div class="form-row">
+            <div class="col-md-6">
+                <label for="">Email:</label>
+                <input type="email" class="form-control" placeholder="Digite seu email">
+            </div>
+            <div class="col-md-6">
+                <label for="">Senha:</label>
+                <input type="password" class="form-control" placeholder="Digite sua senha">
+            </div>
+        </div>
+        <div class="form-row mt-3">
+            <div class="col-md-6">
+                <label for="">Telefone:</label>
+                <input type="text" class="form-control" placeholder="Digite seu telefone">
+            </div>
+            <div class="col-md-6">
+                <label for="">Cpf:</label>
+                <input type="text" class="form-control" placeholder="Digite seu cpf">
+                <small class="form-text text-muted">Somente os 11 dígitos</small>
+            </div>
+        </div>
+        <div class="form-row mt-3">
+            <div class="col-md-5">
+                <label for="">Unidade Principal:</label>
+                <select class="form-control">
+                    <option selected>Selecione</option>
+                </select>
+            </div>
+            <div class="col-md-5">
+                <label for="">Unidade Secundária:</label>
+                <select class="form-control">
+                    <option selected>Selecione</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="ml-5">Realizou o curso?</label>
+                <div class="form-check-inline ml-5">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
+                        value="option1" checked>
+                    <label class="form-check-label" for="exampleRadios1">
+                        Sim
+                    </label>
+                    <input class="ml-4 form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                        value="option2">
+                    <label class="form-check-label" for="exampleRadios2">
+                        Não
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="mt-5">
+            <button class="btn btn-success">Salvar</button>
+            <a href="/login" class="btn btn-danger ml-5">Cancelar</a>
+        </div>
+    </div>
+</div>
