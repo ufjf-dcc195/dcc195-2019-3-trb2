@@ -1,0 +1,19 @@
+<table>
+    <thead>
+        <th colspan="2">{{atendente.nome}}</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Usuários</td>
+            <td>Unidade principal</td>
+            <td>Unidade secundária</td>
+        </tr>
+        {{#each spu}}
+        <tr>
+            <td>{{this.usuario.nome}}</td>
+            <td>{{this.up.nome}}</td>
+            <td>{{this.us.nome}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

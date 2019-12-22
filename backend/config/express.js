@@ -33,8 +33,8 @@ module.exports = function () {
     app.use(methodOverride());
 
     app.use(session(sess));
-	app.set('views', './app/views');
-    app.set('view engine', 'ejs');
+	// app.set('views', './app/views');
+    // app.set('view engine', 'ejs');
     
     const unitsRouter = require('../app/routes/unit');
     const usersRouter = require('../app/routes/user');

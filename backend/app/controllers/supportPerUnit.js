@@ -118,12 +118,9 @@ async function getReport(req, res, next) {
         let idAttendant = req.params.attendantId
         let atendenteQuery = Attendant.findOne({ _id: idAttendant })
         const atendente = await atendenteQuery;
-        console.log("atendente")
-        console.log(atendente)
+        
         let atendimentosQuery = Attendance.find({atendente: atendente._id});
         let atendimentos = await atendimentosQuery;
-        console.log("atendimentos")
-        console.log(atendimentos)
 
         var usuarios = []
         for(let atendimento of atendimentos) {
@@ -131,32 +128,27 @@ async function getReport(req, res, next) {
             const user = await userQuery
             usuarios.push(user)
         }
-        console.log("user")
-        console.log(usuarios[0].nome)
         
-        let unidadesPrincipais = []
-        let unidadesSecundarias = []
+        let SPU = []
         for (usuario of usuarios) {
             let unitPrincipalQuery = Unit.findOne({ _id: usuario.unidadePrincipal })
             let unitPrincipal = await unitPrincipalQuery
-            unidadesPrincipais.push(unitPrincipal)
 
             let unitSecundariaQuery = Unit.findOne({ _id: usuario.unidadeSecundaria })
             let unitSecundaria = await unitSecundariaQuery
-            unidadesSecundarias.push(unitSecundaria)
-        }
-        
-        console.log("unidadesPrincipais")
-        console.log(unidadesPrincipais.length)
-        console.log("unidadesSecundarias")
-        console.log(unidadesSecundarias.length)
 
-        res.render('index', {
+            let support = {
+                usuario: usuario,
+                up: unitPrincipal,
+                us: unitSecundaria
+            }
+            SPU.push(support)
+        }
+
+        res.render('supportPerUnit', {
             titulo: "Relatório",
-            usuarios: usuarios,
             atendente: atendente,
-            unidadesPrincipais: unidadesPrincipais,
-            unidadesSecundarias: unidadesSecundarias
+            spu: SPU
         });
     }
 }
