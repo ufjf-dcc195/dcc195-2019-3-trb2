@@ -1,65 +1,74 @@
-const configExpress = require('../../config/express');
-const { check, validationResult } = require('express-validator');
-const Moongoose = require('mongoose');
-const User = Moongoose.model("User");
+const configExpress = require('../../config/express')
+const { check, validationResult } = require('express-validator')
+const moongoose = require('mongoose')
+const Attendant = moongoose.model("Attendant");
 
-module.exports = {
-    login,
-    logout
-};
-
-
+// TODO: inserir para todas rotas do sistema
 const redirectLogin = (req, res, next) => {
-    if (!req.session.userId) {
-        res.redirect('/login')
-    } else {
-        next()
-    }
+    if (req.session.attendantId === undefined) res.send('Go to Login')
+    else next()
 }
 
 const redirectHome = (req, res, next) => {
-    if (!req.session.userId) {
-        res.redirect('/home')
-    } else {
-        next()
-    }
+    if (req.session.attendantId != undefined) res.send('Go to Home')
+    else next()
 }
 
-function validarErros(req) {
+function validarErrosRequisicao(req) {
     const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(422).json({ errors: errors.array() });
-    }
+    if (!errors.isEmpty()) return res.status(422).json({ errors: errors.array() })
+}
+
+function getAllAttendant(req, res, next) {
+    // const adm = new Attendant({
+    //     nome: 'douglas1122',
+    //     senha: '123'
+    // });
+
+    // adm.save(function (err, adm) {
+    //     if (err) return console.error(err);
+    //     console.dir(adm);
+    // });
+    Attendant.find(function (err, attendants) {
+        if (err) {
+            res.status(400).send(err.message);
+        } else {
+            res.json(attendants);
+        }
+    });
 }
 
 function login(req, res, next) {
-    // redirectHome()
-    // console.log("Login")
-    // validarErros(req)
-    const { email, password } = req.body
-
-    if (email && password) {
-        const user = User.find(user => user.email === email && user.password === password)
-        if (user) {
-            req.session.userId = user.id
-            return res.redirect('/home')
-        }
+    validarErrosRequisicao(req)
+    const { nome, senha } = req.body
+    if (nome && senha) {
+        // TODO: melhorar desempenho consulta
+        Attendant.find({}, function (err, attendants) {
+            if (err) return res.send('Erro')
+            let attendant = {}
+            attendants.find((it) => { if (it.nome === nome && it.senha === senha) attendant = it })
+            if (attendant.nome === nome && attendant.senha === senha) {
+                req.session.attendantId = attendant._id
+                return res.send('Atendente logado com sucesso!')
+            }
+            res.send('Login não foi efetuado!')
+        })
     }
-    res.redirect('/login')
 }
 
 function logout(req, res, next) {
-    //redirectLogin()
-    // console.log("Logout")
-    validarErros(req)
-
+    validarErrosRequisicao(req)
     req.session.destroy(err => {
-        if (err) {
-            return res.redirect('/home')
-        }
+        if (err) return res.send('Erro. Go to Home')
         res.clearCookie(configExpress.SESS_NAME)
-        res.redirect('/login')
+        res.send('Logout efetuado com sucesso!')
     })
 }
 
-//TODO: const {userId} = req.session
+module.exports = {
+    getAllAttendant,
+    login,
+    logout,
+    redirectHome,
+    redirectLogin
+};

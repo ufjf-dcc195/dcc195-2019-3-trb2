@@ -13,9 +13,10 @@ const UserSchema = new Schema({
         match: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
     },
     realizouCurso: Boolean,
-    password: { type: String, required: true }
 });
 UserSchema.path('cpf').validate(function (cpf) {
     return cpf && cpf.length === 11;
 }, 'CPF code must be 11 characters');
 mongoose.model('User', UserSchema);
+
+

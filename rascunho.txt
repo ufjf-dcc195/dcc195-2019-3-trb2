@@ -1,0 +1,9 @@
+    const adm = new Attendant({
+        nome: 'douglas1122',
+        senha: '123'
+    });
+
+    adm.save(function (err, adm) {
+        if (err) return console.error(err);
+        console.dir(adm);
+    });
