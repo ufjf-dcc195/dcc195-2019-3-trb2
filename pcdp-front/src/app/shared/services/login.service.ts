@@ -19,7 +19,7 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
 
-  login(model: any) {
-    return this.http.post(`${this.baseUrl}login`, model, { headers: this.headers, observe: 'response' });
+  async login(model: any) {
+    return this.http.post(`${this.baseUrl}login`, model, {headers: this.headers, observe: 'response'});
   }
 }

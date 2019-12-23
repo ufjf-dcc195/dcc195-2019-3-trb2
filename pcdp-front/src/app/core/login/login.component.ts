@@ -30,8 +30,8 @@ export class LoginComponent implements OnInit {
 
   }
 
-  login() {
-    this.loginService.login(this.loginForm.value).subscribe(
+  async login() {
+    (await this.loginService.login(this.loginForm.value)).subscribe(
       (res) => {
         console.log(res);
 
