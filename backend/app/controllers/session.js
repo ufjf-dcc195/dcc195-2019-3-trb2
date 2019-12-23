@@ -30,9 +30,9 @@ function login(req, res, next) {
             attendants.find((it) => { if (it.email === email && it.senha === password) attendant = it });
             if (attendant.email === email && attendant.senha === password) {
                 req.session.attendantId = attendant._id;
-                return res.status(200).send('Atendente logado com sucesso!')
+                return res.json(attendant);
             }
-            res.status(400).send('Login não foi efetuado!')
+            res.sendStatus(400);
         })
     }
 }
