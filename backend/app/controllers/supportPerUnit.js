@@ -114,7 +114,7 @@ async function getReport(req, res, next) {
 
     */
 
-    if(req.params.attendantId) {
+    try {
         let idAttendant = req.params.attendantId
         let atendenteQuery = Attendant.findOne({ _id: idAttendant })
         const atendente = await atendenteQuery;
@@ -150,5 +150,7 @@ async function getReport(req, res, next) {
             atendente: atendente,
             spu: SPU
         });
+    } catch {
+        res.status(404).send("ID inválido");
     }
 }
