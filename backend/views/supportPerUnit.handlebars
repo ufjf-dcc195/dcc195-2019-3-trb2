@@ -1,0 +1,21 @@
+<div class="container">
+    <table class="table table-striped text-center">
+        <thead class="thead-dark">
+            <th colspan="3">{{atendente.nome}}</th>
+        </thead>
+        <tbody>
+            <tr class="bg-secondary text-light font-weight-bolder">
+                <td>Usuários</td>
+                <td>Unidade principal</td>
+                <td>Unidade secundária</td>
+            </tr>
+            {{#each spu}}
+            <tr>
+                <td>{{this.usuario.nome}}</td>
+                <td>{{this.up.nome}}</td>
+                <td>{{this.us.nome}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

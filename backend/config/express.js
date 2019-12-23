@@ -33,14 +33,15 @@ module.exports = function () {
     app.use(methodOverride());
 
     app.use(session(sess));
-	app.set('views', './app/views');
-    app.set('view engine', 'ejs');
+	// app.set('views', './app/views');
+    // app.set('view engine', 'ejs');
     
     const unitsRouter = require('../app/routes/unit');
     const usersRouter = require('../app/routes/user');
     const sessionRouter = require('../app/routes/session');
     const supportPerUnitRouter = require('../app/routes/supportPerUnit');
     const qtdAtendimentoNivelDuvida = require('../app/routes/attendance');
+    const attendants = require('../app/routes/attendant');
 
     app.use(express.static("./public"))
     app.use('/units', unitsRouter);
@@ -48,6 +49,7 @@ module.exports = function () {
     app.use('/session', sessionRouter);
     app.use('/supportPerUnit', supportPerUnitRouter);
     app.use('/attendance', qtdAtendimentoNivelDuvida);
+    app.use('/attendants', attendants);
 
 
 

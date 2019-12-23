@@ -13,9 +13,20 @@
         </thead>
         <tbody>
             <tr>
-                <td>Unidade</td>
-                <td>Usuário</td>
+                <td>Usuários</td>
+                <td>Unidade principal</td>
+                <td>Unidade secundária</td>
             </tr>
+            <% for (var i=0;i < usuarios.lenght;i++) { %>
+            <tr>
+                <td><%=usuarios[i].nome%></td>
+                <td><%=unidadesPrincipais[i].nome%></td>
+                <td><%=unidadesSecundarias[i].nome%></td>
+                    <!-- <td><%=usuarios[1].nome %></td>
+                    <td><%=unidadesPrincipais[1].nome %></td>
+                    <td><%=unidadesSecundarias[0].nome %></td> -->
+            </tr>
+            <% } %>
         </tbody>
     </table>
 </body>

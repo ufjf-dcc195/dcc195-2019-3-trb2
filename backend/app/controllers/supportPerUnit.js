@@ -7,14 +7,33 @@ module.exports = {
     getReport
 };
 
-function getReport(req, res, next) {
+async function getReport(req, res, next) {
     /* Script para cadastrar dados iniciais */
     /*
+    
+    const unidade1 = new Unit({
+        nome: 'Unidade1'
+    });
+    unidade1.save(function (err, adm) {
+        if (err) return console.error(err);
+        console.dir(adm);
+    });
+    
+    const unidade2 = new Unit({
+        nome: 'Unidade2'
+    });
+    unidade2.save(function (err, adm) {
+        if (err) return console.error(err);
+        console.dir(adm);
+    });
+    
     const usuario1 = new User({
         nome: 'João',
         cpf: '11111111111',
         email: 'joao@gmail.com',
         telefone: '32323232',
+        unidadePrincipal: unidade1,
+        unidadeSecundaria: unidade2,
         realizouCurso: false,
         password: 'joao'
     });
@@ -28,6 +47,7 @@ function getReport(req, res, next) {
         cpf: '22222222222',
         email: 'jose@gmail.com',
         telefone: '32323232',
+        unidadePrincipal: unidade2,
         realizouCurso: true,
         password: 'jose'
     });
@@ -35,23 +55,6 @@ function getReport(req, res, next) {
         if (err) return console.error(err);
         console.dir(adm);
     });
-
-    const unidade1 = new Unit({
-        nome: 'Unidade1'
-    });
-    unidade1.save(function (err, adm) {
-        if (err) return console.error(err);
-        console.dir(adm);
-    });
-
-    const unidade2 = new Unit({
-        nome: 'Unidade2'
-    });
-    unidade2.save(function (err, adm) {
-        if (err) return console.error(err);
-        console.dir(adm);
-    });
-
     const atendente1 = new Attendant({
         nome: 'Atendente1',
         senha: '123'
@@ -111,36 +114,43 @@ function getReport(req, res, next) {
 
     */
 
-    // if(req.query.idAttendant) {
+    try {
         let idAttendant = req.params.attendantId
-        Attendant.findOne({ _id: idAttendant }, function (err, attendant) {
-            if (err) {
-                res.status(400).send(err.message);
-            } else {
-                // res.json(user)
-                let attendances = [Attendance.find({}, {atendente: attendant.id})]
-                let users = []
-                attendances.forEach(attendance => {
-                    users.push(attendance.usuario)
-                });
-                let units = [Unit.find({}, function(err) {
-                    if (!err){ 
-                        process.exit();
-                    } else {throw err;}
-                })];
-                console.log(attendant.nome)
-                console.log(attendances)
-                console.log(users.length)
-                console.log(units.length)
-                res.render('index', {
-                    titulo: "Relatório",
-                    // usuarios: users,
-                    atendente: attendant,
-                    // unidades: units
-                });
-            }
-        });
+        let atendenteQuery = Attendant.findOne({ _id: idAttendant })
+        const atendente = await atendenteQuery;
+        
+        let atendimentosQuery = Attendance.find({atendente: atendente._id});
+        let atendimentos = await atendimentosQuery;
 
-    
-    // }
- }
+        var usuarios = []
+        for(let atendimento of atendimentos) {
+            const userQuery = User.findOne({ _id: atendimento.usuario})
+            const user = await userQuery
+            usuarios.push(user)
+        }
+        
+        let SPU = []
+        for (usuario of usuarios) {
+            let unitPrincipalQuery = Unit.findOne({ _id: usuario.unidadePrincipal })
+            let unitPrincipal = await unitPrincipalQuery
+
+            let unitSecundariaQuery = Unit.findOne({ _id: usuario.unidadeSecundaria })
+            let unitSecundaria = await unitSecundariaQuery
+
+            let support = {
+                usuario: usuario,
+                up: unitPrincipal,
+                us: unitSecundaria
+            }
+            SPU.push(support)
+        }
+
+        res.render('supportPerUnit', {
+            titulo: "Relatório",
+            atendente: atendente,
+            spu: SPU
+        });
+    } catch {
+        res.status(404).send("ID inválido");
+    }
+}
