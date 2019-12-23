@@ -21,14 +21,14 @@ function validarErrosRequisicao(req) {
 
 function login(req, res, next) {
     validarErrosRequisicao(req);
-    const { nome, senha } = req.body;
-    if (nome && senha) {
+    const { email, password } = req.body;
+    if (email && password) {
         // TODO: melhorar desempenho consulta
         Attendant.find({}, function (err, attendants) {
             if (err) return res.send('Erro');
             let attendant = {};
-            attendants.find((it) => { if (it.nome === nome && it.senha === senha) attendant = it });
-            if (attendant.nome === nome && attendant.senha === senha) {
+            attendants.find((it) => { if (it.email === email && it.senha === password) attendant = it });
+            if (attendant.email === email && attendant.senha === password) {
                 req.session.attendantId = attendant._id;
                 return res.status(200).send('Atendente logado com sucesso!')
             }
