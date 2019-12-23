@@ -87,8 +87,20 @@ function qtdAtendimentoTipoDuvida(req, res, next) {
     })
 }
 
+function createAttendance(req, res, next) {
+    const attendance = new Attendance(req.body);
+    attendance.save((err) => {
+        if (err) {
+            res.status(400).send(err.message);
+        } else {
+            res.json(attendance);
+        }
+    })
+}
+
 module.exports = {
     getAllAttendance,
     qtdAtendimentoNivelDuvida,
-    qtdAtendimentoTipoDuvida
+    qtdAtendimentoTipoDuvida,
+    createAttendance
 };
