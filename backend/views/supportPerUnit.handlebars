@@ -11,9 +11,9 @@
             </tr>
             {{#each spu}}
             <tr>
-                <td>{{this.usuario.nome}}</td>
-                <td>{{this.up.nome}}</td>
-                <td>{{this.us.nome}}</td>
+                <td><a href="http://localhost:8080/users/{{this.usuario.id}}">{{this.usuario.nome}}</a></td>
+                <td><a href="http://localhost:8080/units/{{this.up.id}}">{{this.up.nome}}</a></td>
+                <td><a href="http://localhost:8080/units/{{this.usuario.id}}">{{this.us.nome}}</a></td>
             </tr>
             {{/each}}
         </tbody>

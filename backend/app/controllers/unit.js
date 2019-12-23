@@ -3,7 +3,8 @@ const Unit = Moongoose.model("Unit");
 module.exports = {
     createUnit,
     getAllUnits,
-    getAllUnitsOrderByName
+    getAllUnitsOrderByName,
+    getByIdUnit
 };
 
 function createUnit(req, res, next) {
@@ -39,3 +40,13 @@ function getAllUnits(req, res, next) {
             }
         });
 }
+
+function getByIdUnit(req, res, next) {
+    Unit.findOne({ _id: req.params.unitId }, function (err, unit) {
+        if (err) {
+            res.status(400).send(err.message);
+        } else {
+            res.json(unit)
+        }
+    });
+};
