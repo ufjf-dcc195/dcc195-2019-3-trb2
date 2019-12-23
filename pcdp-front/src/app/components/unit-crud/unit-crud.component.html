@@ -5,12 +5,12 @@
         <label for="">Nome da unidade:</label>
         <input type="text" [(ngModel)]="unit.nome" class="form-control" placeholder="Digite o nome da unidade">
         <label for="">Unidades filhas:</label>
-        <select multiple class="form-control">
+        <select multiple  [(ngModel)]="unit.fihos" class="form-control">
             <option *ngFor="let unidade of unidades" [value]="unidade"> {{unidade.nome}} </option>
         </select>
 
         <div class="mt-5">
-            <button class="btn btn-success">Salvar</button>
+            <button class="btn btn-success" (click)="salvar()">Salvar</button>
             <a href="/home" class="btn btn-danger ml-5">Voltar</a>
         </div>
     </div>

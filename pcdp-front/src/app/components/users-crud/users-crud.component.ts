@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/shared/models/user';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-users-crud',
@@ -8,7 +9,7 @@ import { User } from 'src/app/shared/models/user';
 })
 export class UsersCrudComponent implements OnInit {
 
-  constructor() { }
+  constructor( private userService: UserService) { }
 
   user: User = new User();
 
@@ -16,6 +17,7 @@ export class UsersCrudComponent implements OnInit {
   }
 
   save() {
-    
+    console.log(this.user);
+    this.userService.salvar(this.user).subscribe();
   }
 }

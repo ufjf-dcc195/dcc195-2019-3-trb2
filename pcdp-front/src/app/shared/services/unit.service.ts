@@ -14,7 +14,7 @@ export class UnitService {
     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
     'Access-Control-Expose-Headers': 'Authorization'
   });
-  private readonly baseUrl = `${environment.baseUrl}unit/`;
+  private readonly baseUrl = `${environment.baseUrl}units/`;
 
   constructor(private http: HttpClient) { }
 

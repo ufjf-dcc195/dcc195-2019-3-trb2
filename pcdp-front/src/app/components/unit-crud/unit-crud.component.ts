@@ -16,7 +16,7 @@ export class UnitCrudComponent implements OnInit {
   ngOnInit() {
   }
 
-  save() {
+  salvar() {
     this.unitService.salvar(this.unit).subscribe();
   }
 

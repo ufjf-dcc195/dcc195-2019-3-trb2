@@ -1,11 +1,12 @@
 import { environment } from './../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { Attendant } from '../models/attendant';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class AttendantService {
 
   readonly headers = new HttpHeaders({
     'Content-Type': 'application/json',
@@ -14,12 +15,15 @@ export class LoginService {
     'Access-Control-Allow-Headers': 'Access-Control-Allow-Headers, Origin, X-Requested-With, Content-Type, Accept, Authorization'
   });
 
-  private readonly baseUrl = `${environment.baseUrl}session/`;
+  private readonly baseUrl = `${environment.baseUrl}attendants/`;
 
   constructor(private http: HttpClient) { }
 
+  salvar(attendant: Attendant) {
+    return this.http.post<Attendant>(`${this.baseUrl}new`, attendant, { headers: this.headers });
+  }
 
-  login(model: any) {
-    return this.http.post(`${this.baseUrl}login`, model, { headers: this.headers, observe: 'response' });
+  editar(attendant: Attendant) {
+    return this.http.put<Attendant>(`${this.baseUrl}new`, attendant, { headers: this.headers });
   }
 }

@@ -30,11 +30,13 @@ export class LoginComponent implements OnInit {
 
   }
 
-  login(email, password) {
-    this.loginService.login(email, password).pipe(take(1)).subscribe(
-      (next) => {
+  login() {
+    this.loginService.login(this.loginForm.value).subscribe(
+      (res) => {
+        console.log(res);
+
         this.router.navigate(['/home']);
-      },
+       },
       (error) => {
         this.invalidLogin = true;
       }
@@ -43,7 +45,7 @@ export class LoginComponent implements OnInit {
 
   createLoginForm() {
     this.loginForm = this.fb.group({
-      username: [null,
+      email: [null,
         Validators.compose([
           Validators.required
         ])
