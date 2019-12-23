@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const AttendanceSchema = new Schema({
+    numero:  {type: Number},
     atendente: {type: Schema.Types.ObjectId, ref: 'Attendant'},
     usuario: {type: Schema.Types.ObjectId, ref: 'User'},
     atendimentoPorTelefone: Boolean,
