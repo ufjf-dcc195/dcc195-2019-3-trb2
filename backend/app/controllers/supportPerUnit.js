@@ -8,111 +8,149 @@ module.exports = {
 };
 
 async function getReport(req, res, next) {
-    /* Script para cadastrar dados iniciais */
-    /*
+    //#region Script para cadastrar dados iniciais
     
-    const unidade1 = new Unit({
-        nome: 'Unidade1'
-    });
-    unidade1.save(function (err, adm) {
-        if (err) return console.error(err);
-        console.dir(adm);
-    });
+    // const unidade1 = new Unit({
+    //     nome: 'Unidade1'
+    // });
+    // unidade1.save(function (err, adm) {
+    //     if (err) return console.error(err);
+    //     console.dir(adm);
+    // });
     
-    const unidade2 = new Unit({
-        nome: 'Unidade2'
-    });
-    unidade2.save(function (err, adm) {
-        if (err) return console.error(err);
-        console.dir(adm);
-    });
+    // const unidade2 = new Unit({
+    //     nome: 'Unidade2'
+    // });
+    // unidade2.save(function (err, adm) {
+    //     if (err) return console.error(err);
+    //     console.dir(adm);
+    // });
     
-    const usuario1 = new User({
-        nome: 'João',
-        cpf: '11111111111',
-        email: 'joao@gmail.com',
-        telefone: '32323232',
-        unidadePrincipal: unidade1,
-        unidadeSecundaria: unidade2,
-        realizouCurso: false,
-        password: 'joao'
-    });
-    usuario1.save(function (err, adm) {
-        if (err) return console.error(err);
-        console.dir(adm);
-    });
+    // const usuario1 = new User({
+    //     nome: 'João',
+    //     cpf: '11111111111',
+    //     email: 'joao@gmail.com',
+    //     telefone: '32323232',
+    //     unidadePrincipal: unidade1,
+    //     unidadeSecundaria: unidade2,
+    //     realizouCurso: false,
+    //     password: 'joao'
+    // });
+    // usuario1.save(function (err, adm) {
+    //     if (err) return console.error(err);
+    //     console.dir(adm);
+    // });
 
-    const usuario2 = new User({
-        nome: 'José',
-        cpf: '22222222222',
-        email: 'jose@gmail.com',
-        telefone: '32323232',
-        unidadePrincipal: unidade2,
-        realizouCurso: true,
-        password: 'jose'
-    });
-    usuario2.save(function (err, adm) {
-        if (err) return console.error(err);
-        console.dir(adm);
-    });
-    const atendente1 = new Attendant({
-        nome: 'Atendente1',
-        senha: '123'
-    });
-    atendente1.save(function (err, adm) {
-        if (err) return console.error(err);
-        console.dir(adm);
-    });
+    // const usuario2 = new User({
+    //     nome: 'José',
+    //     cpf: '22222222222',
+    //     email: 'jose@gmail.com',
+    //     telefone: '32323232',
+    //     unidadePrincipal: unidade2,
+    //     realizouCurso: true,
+    //     password: 'jose'
+    // });
+    // usuario2.save(function (err, adm) {
+    //     if (err) return console.error(err);
+    //     console.dir(adm);
+    // });
+    // const atendente1 = new Attendant({
+    //     nome: 'Atendente1',
+    //     senha: '123'
+    // });
+    // atendente1.save(function (err, adm) {
+    //     if (err) return console.error(err);
+    //     console.dir(adm);
+    // });
 
-    const atendente2 = new Attendant({
-        nome: 'Atendente2',
-        senha: '321'
-    });
-    atendente2.save(function (err, adm) {
-        if (err) return console.error(err);
-        console.dir(adm);
-    });
+    // const atendente2 = new Attendant({
+    //     nome: 'Atendente2',
+    //     senha: '321'
+    // });
+    // atendente2.save(function (err, adm) {
+    //     if (err) return console.error(err);
+    //     console.dir(adm);
+    // });
 
-    const atendimento1 = new Attendance({
-        atendente: atendente1,
-        usuario: usuario1,
-        atendimentoPorTelefone: true,
-        atendimentoPorPcdp: false,
-        nivel: 2,
-        observacao: 'observação 1'
-    });
-    atendimento1.save(function (err, adm) {
-        if (err) return console.error(err);
-        console.dir(adm);
-    });
+    // const atendimento1 = new Attendance({
+    //     atendente: atendente1,
+    //     usuario: usuario1,
+    //     atendimentoPorTelefone: true,
+    //     atendimentoPorPcdp: false,
+    //     nivel: 2,
+    //     observacao: 'observação 1'
+    // });
+    // atendimento1.save(function (err, adm) {
+    //     if (err) return console.error(err);
+    //     console.dir(adm);
+    // });
 
-    const atendimento2 = new Attendance({
-        atendente: atendente1,
-        usuario: usuario2,
-        atendimentoPorTelefone: false,
-        atendimentoPorPcdp: true,
-        nivel: 3,
-        observacao: 'observação 2'
-    });
-    atendimento2.save(function (err, adm) {
-        if (err) return console.error(err);
-        console.dir(adm);
-    });
+    // const atendimento2 = new Attendance({
+    //     atendente: atendente1,
+    //     usuario: usuario2,
+    //     atendimentoPorTelefone: false,
+    //     atendimentoPorPcdp: true,
+    //     nivel: 3,
+    //     observacao: 'observação 2'
+    // });
+    // atendimento2.save(function (err, adm) {
+    //     if (err) return console.error(err);
+    //     console.dir(adm);
+    // });
 
-    const atendimento3 = new Attendance({
-        atendente: atendente2,
-        usuario: usuario2,
-        atendimentoPorTelefone: false,
-        atendimentoPorPcdp: true,
-        nivel: 4,
-        observacao: 'observação 3'
-    });
-    atendimento3.save(function (err, adm) {
-        if (err) return console.error(err);
-        console.dir(adm);
-    });
+    // const atendimento3 = new Attendance({
+    //     atendente: atendente2,
+    //     usuario: usuario2,
+    //     atendimentoPorTelefone: false,
+    //     atendimentoPorPcdp: true,
+    //     nivel: 4,
+    //     observacao: 'observação 3'
+    // });
+    // atendimento3.save(function (err, adm) {
+    //     if (err) return console.error(err);
+    //     console.dir(adm);
+    // });
 
-    */
+    // const atendimento4 = new Attendance({
+    //     atendente: atendente1,
+    //     usuario: usuario2,
+    //     atendimentoPorTelefone: false,
+    //     atendimentoPorPcdp: true,
+    //     nivel: 4,
+    //     observacao: 'observação 3'
+    // });
+    // atendimento4.save(function (err, adm) {
+    //     if (err) return console.error(err);
+    //     console.dir(adm);
+    // });
+
+    // const atendimento5 = new Attendance({
+    //     atendente: atendente2,
+    //     usuario: usuario1,
+    //     atendimentoPorTelefone: false,
+    //     atendimentoPorPcdp: true,
+    //     nivel: 4,
+    //     observacao: 'observação 3'
+    // });
+    // atendimento5.save(function (err, adm) {
+    //     if (err) return console.error(err);
+    //     console.dir(adm);
+    // });
+
+    // const atendimento6 = new Attendance({
+    //     atendente: atendente2,
+    //     usuario: usuario2,
+    //     atendimentoPorTelefone: false,
+    //     atendimentoPorPcdp: true,
+    //     nivel: 4,
+    //     observacao: 'observação 3'
+    // });
+    // atendimento6.save(function (err, adm) {
+    //     if (err) return console.error(err);
+    //     console.dir(adm);
+    // });
+
+    //#endregion
 
     try {
         const unitId = req.params.unitId
