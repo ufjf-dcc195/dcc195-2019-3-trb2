@@ -1,19 +1,17 @@
 <div class="container">
     <table class="table table-striped text-center">
         <thead class="thead-dark">
-            <th colspan="3">{{atendente.nome}}</th>
+            <th colspan="3">{{unidade.nome}}</th>
         </thead>
         <tbody>
             <tr class="bg-secondary text-light font-weight-bolder">
                 <td>Usuários</td>
-                <td>Unidade principal</td>
-                <td>Unidade secundária</td>
+                <td>Frequência de atendimento</td>
             </tr>
-            {{#each spu}}
+            {{#each repport}}
             <tr>
-                <td><a href="http://localhost:8080/users/{{this.usuario.id}}">{{this.usuario.nome}}</a></td>
-                <td><a href="http://localhost:8080/units/{{this.up.id}}">{{this.up.nome}}</a></td>
-                <td><a href="http://localhost:8080/units/{{this.usuario.id}}">{{this.us.nome}}</a></td>
+                <td><a href="/users/{{this.user.id}}">{{this.user.nome}}</a></td>
+                <td>{{this.freq}}</td>
             </tr>
             {{/each}}
         </tbody>

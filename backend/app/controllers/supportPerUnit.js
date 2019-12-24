@@ -115,41 +115,54 @@ async function getReport(req, res, next) {
     */
 
     try {
-        let idAttendant = req.params.attendantId
-        let atendenteQuery = Attendant.findOne({ _id: idAttendant })
-        const atendente = await atendenteQuery;
+        const unitId = req.params.unitId
+        const unitQuery = Unit.findOne({ _id: unitId })
+        const unit = await unitQuery;
         
-        let atendimentosQuery = Attendance.find({atendente: atendente._id});
-        let atendimentos = await atendimentosQuery;
-
-        var usuarios = []
-        for(let atendimento of atendimentos) {
-            const userQuery = User.findOne({ _id: atendimento.usuario})
-            const user = await userQuery
-            usuarios.push(user)
-        }
-        
-        let SPU = []
-        for (usuario of usuarios) {
-            let unitPrincipalQuery = Unit.findOne({ _id: usuario.unidadePrincipal })
-            let unitPrincipal = await unitPrincipalQuery
-
-            let unitSecundariaQuery = Unit.findOne({ _id: usuario.unidadeSecundaria })
-            let unitSecundaria = await unitSecundariaQuery
-
-            let support = {
-                usuario: usuario,
-                up: unitPrincipal,
-                us: unitSecundaria
-            }
-            SPU.push(support)
-        }
-
-        res.render('supportPerUnit', {
-            titulo: "Relatório",
-            atendente: atendente,
-            spu: SPU
+        const usersQuery = User.find({
+            $or: [
+                {unidadePrincipal: unit._id},
+                {unidadeSecundaria: unit._id}
+            ]
         });
+        const users = await usersQuery;
+
+        const attendancesQuery = Attendance.find();
+        const attendances = await attendancesQuery;
+
+
+        let repport = []
+        for (let user of users) {
+            let aux = {
+                user: user,
+                freq: 0
+            }
+            var cont = 0
+            for (let attendance of attendances) {
+                if(attendance.usuario == user.id){
+                    cont++
+                }    
+            }
+            
+            aux.freq = cont
+            repport.push(aux)
+        }
+
+        if(!req.originalUrl.includes("json")) {
+            res.render('supportPerUnit', {
+                titulo: "Relatório",
+                unidade: unit,
+                repport: repport
+            });
+        } else {
+            let json = {
+                unidade: unit,
+                repport: repport
+            }
+            res.header("Content-Type",'application/json');
+            res.send(JSON.stringify(json, null, 4));
+        }
+
     } catch {
         res.status(404).send("ID inválido");
     }
