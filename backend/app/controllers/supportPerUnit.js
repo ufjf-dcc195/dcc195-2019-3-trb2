@@ -173,16 +173,16 @@ async function getReport(req, res, next) {
         for (let user of users) {
             let aux = {
                 user: user,
-                freq: 0
+                attendances: []
             }
-            var cont = 0
+            var att = []
             for (let attendance of attendances) {
                 if(attendance.usuario == user.id){
-                    cont++
+                    att.push(attendance)
                 }    
             }
             
-            aux.freq = cont
+            aux.attendances = att
             repport.push(aux)
         }
 

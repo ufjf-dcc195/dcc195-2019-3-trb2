@@ -11,7 +11,7 @@
             {{#each repport}}
             <tr>
                 <td><a href="/users/{{this.user.id}}">{{this.user.nome}}</a></td>
-                <td>{{this.freq}}</td>
+                <td>{{this.attendances.length}}</td>
             </tr>
             {{/each}}
         </tbody>
