@@ -6,21 +6,30 @@ const methodOverride = require("method-override");
 const session = require("express-session");
 const config = require("./config");
 const ejs = require('ejs');
-const handlebars = require('express-handlebars')
+var cors = require('cors');
+const handlebars = require('express-handlebars');
+
+
 
 module.exports = function () {
-    const app = express();
-    app.engine('handlebars', handlebars({ defaultLayout: 'index' }))
-    app.set('view engine', 'handlebars')
 
-    const SESS_NAME = 'sid'
+
+
+    const app = express();
+    app.engine('handlebars', handlebars({ defaultLayout: 'index' }));
+    app.set('view engine', 'handlebars');
+    var corsOptions = {
+        origin: true
+    };
+    app.use(cors(corsOptions));
+    const SESS_NAME = 'sid';
     const sess = {
         name: SESS_NAME,
         saveUninitialized: false,
         resave: false,
         secret: config.sessionSecret,
         cookie: { maxAge: 6000 }
-    }
+    };
 
     if (process.env.NODE_ENV === "development") {
         app.use(morgan('dev'));
@@ -43,7 +52,7 @@ module.exports = function () {
     const qtdAtendimentoNivelDuvida = require('../app/routes/attendance');
     const attendants = require('../app/routes/attendant');
 
-    app.use(express.static("./public"))
+    app.use(express.static("./public"));
     app.use('/units', unitsRouter);
     app.use('/users', usersRouter);
     app.use('/session', sessionRouter);

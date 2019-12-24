@@ -5,7 +5,7 @@
       <div class="header-login">
         <div class="mt-5 row">
           <div class="col-md-12">
-            <h3 class="title-login">Bem-Vindo ao PCPD!</h3>
+            <h3 class="title-login text-center">Bem-Vindo ao Sistema de Atendimento a Dúvidas!</h3>
           </div>
         </div>
       </div>
@@ -13,23 +13,23 @@
       <div class="box-login">
         <form [formGroup]="loginForm" (ngSubmit)="login()">
           <div class="form-group">
-            <label class="label-login" for="username">Usuário</label>
+            <label class="label-login" for="email">Email</label>
 
-            <input type="text" id="txtUsuario" name="username" class="form-control" formControlName="username" data-toggle="tooltip" data-placement="bottom" title="No mínimo 3 caracteres">
+            <input type="text" id="txtUsuario" name="email" class="form-control" formControlName="email" data-toggle="tooltip" data-placement="bottom">
           </div>
 
           <div class="form-group">
             <label class="label-login" for="password">Senha</label>
             <input type="password" id="txtPassword" name="password" class="form-control" formControlName="password" data-toggle="tooltip" data-placement="bottom" title="No mínimo 6 caracteres">
           </div>
-
-          <span class="invalid-login" *ngIf="invalidLogin">Não foi possível autenticar o usuário. The user name or
+          <span class="text-danger" *ngIf="invalidLogin"> <small> Não foi possível autenticar o usuário. The user name or
             password
-            is incorrect. </span>
+            is incorrect.</small></span>
 
-          <div class="text-center">
-            <button type="submit" [ngClass]="{ 'disable' : !loginForm.valid }" [disabled]="!loginForm.valid" class="btn btn-primary"
+          <div class="text-center mt-4">
+            <button type="submit" [disabled]="!loginForm.valid" class="btn btn-success"
               id="btnAcessar">Entrar</button>
+            <a class="ml-5 btn btn-primary" href="/signup">Registre-se</a>  
           </div>
         </form>
       </div>
